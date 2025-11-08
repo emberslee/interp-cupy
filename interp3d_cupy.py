@@ -128,8 +128,10 @@ class Interp3d:
 
     def _launch_kernel(self, kernel, mapin, mapout, *args):
         pextz, pexty, pextx = args[-3:]
-        
+       
+        # Max thread is 1024, 8 * 8 * 4 = 256 < 1024
         block_size = (8, 8, 4)
+
         grid_size = (
             (pextx + block_size[0] - 1) // block_size[0],
             (pexty + block_size[1] - 1) // block_size[1],
